@@ -21,7 +21,7 @@ enum RadioMessage {
 radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
     serial.writeLine("Gefinished op " + Sec + " seconden en " + ("" + Min + " minuten."))
     if (onmogelijke_tijd == 1) {
-        serial.writeLine("DAT WAS GEEN ERRLIJKE FINISH")
+        serial.writeLine("DAT WAS GEEN EERLIJKE FINISH")
         basic.pause(2000)
         serial.writeLine("VALSSPELER")
         basic.pause(500)
