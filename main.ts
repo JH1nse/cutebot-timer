@@ -18,77 +18,134 @@ enum RadioMessage {
     rem = 58635,
     Checkpoint3 = 63779
 }
+input.onButtonPressed(Button.A, function () {
+	
+})
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    for (let index = 0; index < 99999999; index++) {
-        led.plot(1, 0)
-        basic.pause(200)
-        led.plot(2, 0)
-        basic.pause(200)
-        led.plot(3, 0)
-        basic.pause(200)
-        led.plot(4, 1)
-        basic.pause(200)
-        led.plot(4, 2)
-        basic.pause(200)
-        led.plot(4, 3)
-        basic.pause(200)
-        led.plot(3, 4)
-        basic.pause(200)
-        led.plot(2, 4)
-        basic.pause(200)
-        led.plot(1, 4)
-        basic.pause(200)
-        led.plot(0, 3)
-        basic.pause(200)
-        led.plot(0, 2)
-        basic.pause(200)
-        led.plot(0, 1)
-        basic.pause(200)
-        led.unplot(1, 0)
-        basic.pause(200)
-        led.unplot(2, 0)
-        basic.pause(200)
-        led.unplot(3, 0)
-        basic.pause(200)
-        led.unplot(4, 1)
-        basic.pause(200)
-        led.unplot(4, 2)
-        basic.pause(200)
-        led.unplot(4, 3)
-        basic.pause(200)
-        led.unplot(3, 4)
-        basic.pause(200)
-        led.unplot(2, 4)
-        basic.pause(200)
-        led.unplot(1, 4)
-        basic.pause(200)
-        led.unplot(0, 3)
-        basic.pause(200)
-        led.unplot(0, 2)
-        basic.pause(200)
-        led.unplot(0, 1)
-        basic.pause(200)
+	
+})
+input.onButtonPressed(Button.B, function () {
+	
+})
+radio.onReceivedMessage(RadioMessage.rechts, function () {
+    if (gestart == 0) {
+        Min = 0
+        Sec = 0
+        gestart = 1
+        for (let index = 0; index < 10000000000000000; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
     }
 })
 radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
     serial.writeLine("Checkpoint 1 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
 })
+radio.onReceivedMessage(RadioMessage.vooruit, function () {
+    if (gestart == 0) {
+        Min = 0
+        Sec = 0
+        gestart = 1
+        for (let index = 0; index < 10000000000000000; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+    }
+})
+radio.onReceivedMessage(RadioMessage.links, function () {
+    if (gestart == 0) {
+        Min = 0
+        Sec = 0
+        gestart = 1
+        for (let index = 0; index < 10000000000000000; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+    }
+})
+radio.onReceivedMessage(RadioMessage.achteruit, function () {
+    if (gestart == 0) {
+        Min = 0
+        Sec = 0
+        gestart = 1
+        for (let index = 0; index < 10000000000000000; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+    }
+})
 radio.onReceivedMessage(RadioMessage.StartTijd, function () {
 	
 })
-let Min = 0
 let Sec = 0
+let Min = 0
+let gestart = 0
 led.plot(2, 2)
+gestart = 0
 radio.setGroup(35)
-for (let index = 0; index < 9999999999; index++) {
-    serial.writeValue("Secondes", Sec)
-    serial.writeValue("Minuten", Min)
-    basic.pause(1000)
-    Sec += 1
+for (let index = 0; index < 10000000000000000; index++) {
+    led.plot(2, 0)
+    basic.pause(200)
+    led.plot(3, 0)
+    basic.pause(200)
+    led.plot(4, 1)
+    basic.pause(200)
+    led.plot(4, 2)
+    basic.pause(200)
+    led.plot(4, 3)
+    basic.pause(200)
+    led.plot(3, 4)
+    basic.pause(200)
+    led.plot(2, 4)
+    basic.pause(200)
+    led.plot(1, 4)
+    basic.pause(200)
+    led.plot(0, 3)
+    basic.pause(200)
+    led.plot(0, 2)
+    basic.pause(200)
+    led.plot(0, 1)
+    basic.pause(200)
+    led.plot(1, 0)
+    basic.pause(200)
+    led.unplot(2, 0)
+    basic.pause(200)
+    led.unplot(3, 0)
+    basic.pause(200)
+    led.unplot(4, 1)
+    basic.pause(200)
+    led.unplot(4, 2)
+    basic.pause(200)
+    led.unplot(4, 3)
+    basic.pause(200)
+    led.unplot(3, 4)
+    basic.pause(200)
+    led.unplot(2, 4)
+    basic.pause(200)
+    led.unplot(1, 4)
+    basic.pause(200)
+    led.unplot(0, 3)
+    basic.pause(200)
+    led.unplot(0, 2)
+    basic.pause(200)
+    led.unplot(0, 1)
+    basic.pause(200)
+    led.unplot(1, 0)
+    basic.pause(200)
 }
-basic.forever(function () {
-    if (Sec == 60) {
-        Sec = 0
-        Min += 1
-    }
-})
