@@ -20,6 +20,22 @@ enum RadioMessage {
 }
 radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
     serial.writeLine("Gefinished op " + Sec + " seconden en " + ("" + Min + " minuten."))
+    if (onmogelijke_tijd == 1) {
+        serial.writeLine("DAT WAS GEEN ERRLIJKE FINISH")
+        basic.pause(2000)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        Min = randint(0.9, 10.1)
+        serial.writeLine("EIGENLIJK GEFINISHED OP  " + Sec + " seconden en " + ("" + Min + " minuten."))
+        basic.pause(2000)
+        serial.writeLine("HA")
+    }
+    onmogelijke_tijd = 1
+    basic.pause(5000)
+    onmogelijke_tijd = 0
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 	
@@ -45,9 +61,37 @@ radio.onReceivedMessage(RadioMessage.rechts, function () {
 })
 radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
     serial.writeLine("Checkpoint 1 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
+    if (onmogelijke_tijd == 1) {
+        serial.writeLine("MAAR DAT KAN NIET")
+        basic.pause(2000)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        Min = randint(0.9, 10.1)
+        serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
+    }
+    onmogelijke_tijd = 1
+    basic.pause(5000)
+    onmogelijke_tijd = 0
 })
 radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
     serial.writeLine("Checkpoint 2 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
+    if (onmogelijke_tijd == 1) {
+        serial.writeLine("MAAR DAT KAN NIET")
+        basic.pause(2000)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        Min = randint(0.9, 10.1)
+        serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
+    }
+    onmogelijke_tijd = 1
+    basic.pause(5000)
+    onmogelijke_tijd = 0
 })
 radio.onReceivedMessage(RadioMessage.vooruit, function () {
     if (gestart == 0) {
@@ -103,7 +147,9 @@ radio.onReceivedMessage(RadioMessage.StartTijd, function () {
 let Min = 0
 let Sec = 0
 let gestart = 0
+let onmogelijke_tijd = 0
 led.plot(2, 2)
+onmogelijke_tijd = 1
 gestart = 0
 radio.setGroup(35)
 for (let index = 0; index < 10000000000000000; index++) {
@@ -155,4 +201,5 @@ for (let index = 0; index < 10000000000000000; index++) {
     basic.pause(200)
     led.unplot(1, 0)
     basic.pause(200)
+    onmogelijke_tijd = 0
 }
