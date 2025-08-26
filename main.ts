@@ -18,8 +18,8 @@ enum RadioMessage {
     rem = 58635,
     Checkpoint3 = 63779
 }
-input.onButtonPressed(Button.A, function () {
-	
+radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
+    serial.writeLine("Gefinished op " + Sec + " seconden en " + ("" + Min + " minuten."))
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 	
@@ -29,6 +29,7 @@ input.onButtonPressed(Button.B, function () {
 })
 radio.onReceivedMessage(RadioMessage.rechts, function () {
     if (gestart == 0) {
+        serial.writeLine("Tijd gestart")
         Min = 0
         Sec = 0
         gestart = 1
@@ -45,8 +46,12 @@ radio.onReceivedMessage(RadioMessage.rechts, function () {
 radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
     serial.writeLine("Checkpoint 1 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
 })
+radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
+    serial.writeLine("Checkpoint 2 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
+})
 radio.onReceivedMessage(RadioMessage.vooruit, function () {
     if (gestart == 0) {
+        serial.writeLine("Tijd gestart")
         Min = 0
         Sec = 0
         gestart = 1
@@ -62,6 +67,7 @@ radio.onReceivedMessage(RadioMessage.vooruit, function () {
 })
 radio.onReceivedMessage(RadioMessage.links, function () {
     if (gestart == 0) {
+        serial.writeLine("Tijd gestart")
         Min = 0
         Sec = 0
         gestart = 1
@@ -77,6 +83,7 @@ radio.onReceivedMessage(RadioMessage.links, function () {
 })
 radio.onReceivedMessage(RadioMessage.achteruit, function () {
     if (gestart == 0) {
+        serial.writeLine("Tijd gestart")
         Min = 0
         Sec = 0
         gestart = 1
@@ -93,8 +100,8 @@ radio.onReceivedMessage(RadioMessage.achteruit, function () {
 radio.onReceivedMessage(RadioMessage.StartTijd, function () {
 	
 })
-let Sec = 0
 let Min = 0
+let Sec = 0
 let gestart = 0
 led.plot(2, 2)
 gestart = 0
