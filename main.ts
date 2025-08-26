@@ -28,7 +28,7 @@ radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
         serial.writeLine("VALSSPELER")
         basic.pause(500)
         serial.writeLine("VALSSPELER")
-        Min = randint(0.9, 10.1)
+        Min += randint(0.9, 10.1)
         serial.writeLine("EIGENLIJK GEFINISHED OP  " + Sec + " seconden en " + ("" + Min + " minuten."))
         basic.pause(2000)
         serial.writeLine("HA")
@@ -46,10 +46,20 @@ input.onButtonPressed(Button.B, function () {
 radio.onReceivedMessage(RadioMessage.rechts, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
+        onmogelijke_tijd = 1
         Min = 0
         Sec = 0
         gestart = 1
-        for (let index = 0; index < 10000000000000000; index++) {
+        for (let index = 0; index < 5; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+        onmogelijke_tijd = 0
+        for (let index = 0; index < 99999999999999; index++) {
             basic.pause(1000)
             Sec += 1
             if (Sec == 60) {
@@ -69,8 +79,8 @@ radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
         serial.writeLine("VALSSPELER")
         basic.pause(500)
         serial.writeLine("VALSSPELER")
-        Min = randint(0.9, 10.1)
-        serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
+        Min += randint(0.9, 10.1)
+        serial.writeLine("Checkpoint 1 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
     }
     onmogelijke_tijd = 1
     basic.pause(5000)
@@ -86,7 +96,7 @@ radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
         serial.writeLine("VALSSPELER")
         basic.pause(500)
         serial.writeLine("VALSSPELER")
-        Min = randint(0.9, 10.1)
+        Min += randint(0.9, 10.1)
         serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
     }
     onmogelijke_tijd = 1
@@ -96,10 +106,20 @@ radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
 radio.onReceivedMessage(RadioMessage.vooruit, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
+        onmogelijke_tijd = 1
         Min = 0
         Sec = 0
         gestart = 1
-        for (let index = 0; index < 10000000000000000; index++) {
+        for (let index = 0; index < 5; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+        onmogelijke_tijd = 0
+        for (let index = 0; index < 99999999999999; index++) {
             basic.pause(1000)
             Sec += 1
             if (Sec == 60) {
@@ -112,10 +132,20 @@ radio.onReceivedMessage(RadioMessage.vooruit, function () {
 radio.onReceivedMessage(RadioMessage.links, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
+        onmogelijke_tijd = 1
         Min = 0
         Sec = 0
         gestart = 1
-        for (let index = 0; index < 10000000000000000; index++) {
+        for (let index = 0; index < 5; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+        onmogelijke_tijd = 0
+        for (let index = 0; index < 99999999999999; index++) {
             basic.pause(1000)
             Sec += 1
             if (Sec == 60) {
@@ -128,10 +158,20 @@ radio.onReceivedMessage(RadioMessage.links, function () {
 radio.onReceivedMessage(RadioMessage.achteruit, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
+        onmogelijke_tijd = 1
         Min = 0
         Sec = 0
         gestart = 1
-        for (let index = 0; index < 10000000000000000; index++) {
+        for (let index = 0; index < 5; index++) {
+            basic.pause(1000)
+            Sec += 1
+            if (Sec == 60) {
+                Sec = 0
+                Min += 1
+            }
+        }
+        onmogelijke_tijd = 0
+        for (let index = 0; index < 99999999999999; index++) {
             basic.pause(1000)
             Sec += 1
             if (Sec == 60) {
@@ -146,11 +186,11 @@ radio.onReceivedMessage(RadioMessage.StartTijd, function () {
 })
 let Min = 0
 let Sec = 0
-let gestart = 0
 let onmogelijke_tijd = 0
+let gestart = 0
 led.plot(2, 2)
-onmogelijke_tijd = 1
 gestart = 0
+onmogelijke_tijd = 1
 radio.setGroup(35)
 for (let index = 0; index < 10000000000000000; index++) {
     led.plot(2, 0)
@@ -201,5 +241,4 @@ for (let index = 0; index < 10000000000000000; index++) {
     basic.pause(200)
     led.unplot(1, 0)
     basic.pause(200)
-    onmogelijke_tijd = 0
 }
