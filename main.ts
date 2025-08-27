@@ -18,6 +18,13 @@ enum RadioMessage {
     rem = 58635,
     Checkpoint3 = 63779
 }
+// Als de finish behaald is dan wordt de behaalde tijd weergegeven in de output.
+// 
+// Er wordt gecheckt of de speler de finish op een onmogelijke tijd heeft gehaald, als dit waar is dan wordt er gemeld dat het valsspelen is en wordt de eindtijd met willekeurig 1 minuut tot 10 minuten verhoogd en worden er een heleboel decimalen bij de minuten toegevoegd (dat is de straf)
+// 
+// Als laatste wordt de valsspeel variabel gezet op 1 (waar) voor 5 seconden, daarna wordt het 0 (onwaar)
+// 
+// ((dat laatste is onnodig eigenlijk))
 radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
     serial.writeLine("Gefinished op " + Sec + " seconden en " + ("" + Min + " minuten."))
     if (onmogelijke_tijd == 1) {
@@ -36,12 +43,6 @@ radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
     onmogelijke_tijd = 1
     basic.pause(5000)
     onmogelijke_tijd = 0
-})
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-	
-})
-input.onButtonPressed(Button.B, function () {
-	
 })
 radio.onReceivedMessage(RadioMessage.rechts, function () {
     if (gestart == 0) {
@@ -69,6 +70,11 @@ radio.onReceivedMessage(RadioMessage.rechts, function () {
         }
     }
 })
+// Als checkpoint 1 behaald is dan wordt de behaalde tijd weergegeven in de output.
+// 
+// Er wordt gecheckt of de speler de checkpoint op een onmogelijke tijd heeft gehaald, als dit waar is dan wordt er gemeld dat het valsspelen is en wordt de tijd met willekeurig 1 minuut tot 10 minuten verhoogd en worden er een heleboel decimalen bij de minuten toegevoegd (dat is de straf)
+// 
+// Als laatste wordt de valsspeel variabel gezet op 1 (waar) voor 5 seconden, daarna wordt het 0 (onwaar)
 radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
     serial.writeLine("Checkpoint 1 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
     if (onmogelijke_tijd == 1) {
@@ -86,6 +92,11 @@ radio.onReceivedMessage(RadioMessage.Checkpoint1Behaald, function () {
     basic.pause(5000)
     onmogelijke_tijd = 0
 })
+// Als checkpoint 2 behaald is dan wordt de behaalde tijd weergegeven in de output.
+// 
+// Er wordt gecheckt of de speler de checkpoint op een onmogelijke tijd heeft gehaald, als dit waar is dan wordt er gemeld dat het valsspelen is en wordt de tijd met willekeurig 1 minuut tot 10 minuten verhoogd en worden er een heleboel decimalen bij de minuten toegevoegd (dat is de straf)
+// 
+// Als laatste wordt de valsspeel variabel gezet op 1 (waar) voor 5 seconden, daarna wordt het 0 (onwaar)
 radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
     serial.writeLine("Checkpoint 2 is behaald op " + Sec + " seconden en " + ("" + Min + " minuten."))
     if (onmogelijke_tijd == 1) {
@@ -95,9 +106,6 @@ radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
         basic.pause(500)
         serial.writeLine("VALSSPELER")
         basic.pause(500)
-        serial.writeLine("VALSSPELER")
-        Min += randint(0.9, 10.1)
-        serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
     }
     onmogelijke_tijd = 1
     basic.pause(5000)
@@ -155,6 +163,13 @@ radio.onReceivedMessage(RadioMessage.links, function () {
         }
     }
 })
+/**
+ * Deze zorgen ervoor dat de tijd start als de auto begint te bewegen.
+ * 
+ * De tijd wordt gereset, gestart en een variabel die valspelen voorkomt wordt aangezet.
+ * 
+ * Na 5 seconden wordt deze valsspeel variabel uitgezet en dan telt de tijd door elke seconde en als er 60 seconden zijn wordt dit veranderd in een minuut
+ */
 radio.onReceivedMessage(RadioMessage.achteruit, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
@@ -181,9 +196,11 @@ radio.onReceivedMessage(RadioMessage.achteruit, function () {
         }
     }
 })
-radio.onReceivedMessage(RadioMessage.StartTijd, function () {
-	
-})
+// Dit reset variabelen en zet de radio op channel 35
+// 
+// Daarna speelt het oneindig lang een klok animatie
+// 
+// (Ik had de "Wissel x0 y0" blok kunnen gebruiken hier maar ik kwam daar te laat achter, dus eerst doet het lichtjes aan en daarna doet het ze een voor een weer uit)
 let Min = 0
 let Sec = 0
 let onmogelijke_tijd = 0
