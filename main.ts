@@ -44,6 +44,22 @@ radio.onReceivedMessage(RadioMessage.Checkpoint3Behaald, function () {
     basic.pause(5000)
     onmogelijke_tijd = 0
 })
+/**
+ * Als race control een registratie binnenkrijgt vermeldt het de registratie
+ */
+radio.onReceivedMessage(RadioMessage.Checkpoint3, function () {
+    serial.writeLine("Checkpoint 1 is geregistreerd")
+})
+// Dit is het stopsignaal om de tijd vroegtijdig te stoppen
+input.onButtonPressed(Button.AB, function () {
+    serial.writeLine("Tijd is vroegtijdig gestopt op " + Sec + " seconden en " + ("" + Min + " minuten."))
+})
+radio.onReceivedMessage(RadioMessage.Checkpoint4, function () {
+    serial.writeLine("Checkpoint 2 is geregistreerd")
+})
+radio.onReceivedMessage(RadioMessage.Checkpoint4Behaald, function () {
+    serial.writeLine("Finish is geregistreerd")
+})
 radio.onReceivedMessage(RadioMessage.rechts, function () {
     if (gestart == 0) {
         serial.writeLine("Tijd gestart")
