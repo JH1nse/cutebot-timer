@@ -122,6 +122,9 @@ radio.onReceivedMessage(RadioMessage.Checkpoint2Behaald, function () {
         basic.pause(500)
         serial.writeLine("VALSSPELER")
         basic.pause(500)
+        serial.writeLine("VALSSPELER")
+        Min += randint(0.9, 10.1)
+        serial.writeLine("Checkpoint 2 TIJD IS VERANDERD NAAR " + Sec + " seconden en " + ("" + Min + " minuten."))
     }
     onmogelijke_tijd = 1
     basic.pause(5000)
